@@ -72,7 +72,7 @@ class CityServiceImplTest {
     }
 
     @Test
-    @Order(3)
+    @Order(4)
     void delete() {
         var cities = cityService.readAll();
 
@@ -88,7 +88,7 @@ class CityServiceImplTest {
     }
 
     @Test
-    @Order(4)
+    @Order(3)
     void searchByCity(){
         List<City> cities = cityService.searchByCityByName("Pariss");
         AtomicReference<Boolean> cityIsFound = new AtomicReference<>(false);
