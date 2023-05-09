@@ -121,6 +121,8 @@ class ServiceImplTest {
         log.info("<<<<<<<< Start getting all capitals >>>>>>>>>");
         List<City> cities = service.getAllCapitals();
         cities.forEach(c->log.trace("{}",c));
+
+        assertNotNull(cities, "Error while getting all capitals");
         log.info("<<<<<<<< Start getting all capitals >>>>>>>>>");
     }
 }
