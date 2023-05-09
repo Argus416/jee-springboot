@@ -26,17 +26,17 @@ public class CountryServiceImpl implements CRUDService<Country, Long> {
 
     @Override
     public Country read(Long id) {
-        return null;
+        return repository.findById(id).get();
     }
 
     @Override
     public Country update(Country country) {
-        return null;
+        return repository.save(country);
     }
 
     @Override
     public void delete(Long id) {
-
+        repository.deleteById(id);
     }
 
     @Override

@@ -23,22 +23,22 @@ public class CityServiceImpl implements CRUDService<City, Long> {
     private static final Logger log = LoggerFactory.getLogger(CityServiceImpl.class);
     @Override
     public City create(City country) {
-        return null;
+        return repository.save(country);
     }
 
     @Override
     public City read(Long id) {
-        return null;
+        return repository.findById(id).get();
     }
 
     @Override
     public City update(City country) {
-        return null;
+        return repository.save(country);
     }
 
     @Override
     public void delete(Long id) {
-
+        repository.deleteById(id);
     }
 
     @Override
