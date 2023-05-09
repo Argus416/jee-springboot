@@ -3,6 +3,7 @@ package com.hitema.jee.services;
 import com.hitema.jee.entities.City;
 import com.hitema.jee.entities.Country;
 import com.hitema.jee.interfaces.CRUDService;
+import com.hitema.jee.interfaces.CityService;
 import com.hitema.jee.repositories.CityRepository;
 import com.hitema.jee.repositories.CountryRepository;
 import org.slf4j.Logger;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CityServiceImpl implements CRUDService<City, Long> {
+public class CityServiceImpl implements CityService {
 
     private final CityRepository repository;
 
@@ -44,5 +45,11 @@ public class CityServiceImpl implements CRUDService<City, Long> {
     @Override
     public List<City> readAll() {
         return repository.findAll();
+    }
+
+    @Override
+
+    public List<City> searchByCityByName(String city) {
+        return repository.findByCityContaining(city);
     }
 }

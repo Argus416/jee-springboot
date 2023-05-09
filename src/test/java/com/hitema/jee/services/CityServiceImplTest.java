@@ -2,8 +2,7 @@ package com.hitema.jee.services;
 
 import com.hitema.jee.entities.City;
 import com.hitema.jee.entities.Country;
-import com.hitema.jee.interfaces.CRUDService;
-import com.mysql.cj.log.Log;
+import com.hitema.jee.interfaces.CityService;
 import org.junit.jupiter.api.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -21,7 +22,7 @@ class CityServiceImplTest {
 
     private static final Logger log = LoggerFactory.getLogger(CountryServiceImplTest.class);
     @Autowired
-    private CRUDService<City, Long> cityService;
+    private CityService cityService;
 
     @BeforeEach
     void setUp() {
@@ -87,8 +88,22 @@ class CityServiceImplTest {
     }
 
     @Test
+    @Order(4)
+    void searchByCity(){
+        List<City> cities = cityService.searchByCityByName("Pariss");
+        AtomicReference<Boolean> cityIsFound = new AtomicReference<>(false);
+        cities.forEach(c->{
+            if(c.getCity().equals("Pariss")){
+                cityIsFound.set(true);
+            }
+            log.trace("{}",c);
+        });
+
+        assertEquals(true, cityIsFound.get(), "Error while searching a city");
+    }
+
+    @Test
     void readAll() {
-        cityService.readAll().forEach(c->log.trace("{}",c)
-        );
+        cityService.readAll().forEach(c->log.trace("{}",c));
     }
 }
