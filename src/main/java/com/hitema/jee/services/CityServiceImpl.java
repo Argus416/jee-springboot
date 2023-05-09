@@ -29,7 +29,7 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public City read(Long id) {
-        return repository.findById(id).get();
+        return repository.findById(id).orElse(null);
     }
 
     @Override
@@ -50,6 +50,6 @@ public class CityServiceImpl implements CityService {
     @Override
 
     public List<City> searchByCityByName(String city) {
-        return repository.findByCityContaining(city);
+        return repository.findAllByCityContaining(city);
     }
 }

@@ -32,7 +32,7 @@ class CityServiceImplTest {
     @Order(1)
     @Test
     void create() {
-        log.info("Start creating a new city");
+        log.info("<<<<<<<< Start creating a new city >>>>>>>>>");
         City newCity = new City();
         Country country = new Country();
 
@@ -46,19 +46,22 @@ class CityServiceImplTest {
         cityService.create(newCity);
 
         assertNotNull(newCity.getId(), "Error while creating a new city");
+        log.info("<<<<<<<< Finish creating the city >>>>>>>>>");
     }
 
     @Test
     void read() {
-        log.info("Start reading a city");
+        log.info("<<<<<<<< Start reading the city >>>>>>>>>");
         City city = cityService.read(1L);
         log.trace("{}", city);
         assertEquals("A Corua (La Corua)", city.getCity(), "Error while reading a city");
+        log.info("<<<<<<<< Finish reading the city >>>>>>>>>");
     }
 
     @Test
     @Order(2)
     void update() {
+        log.info("<<<<<<<< Start updating a city >>>>>>>>>");
         var cities = cityService.readAll();
 
         City city = cities.stream()
@@ -69,11 +72,13 @@ class CityServiceImplTest {
         cityService.update(city);
         log.trace("{}", city);
         assertEquals("Pariss_updated", city.getCity(), "Error while updating a city");
+        log.info("<<<<<<<< Finish updating a city >>>>>>>>>");
     }
 
     @Test
     @Order(4)
     void delete() {
+        log.info("<<<<<<<< Start deleting city >>>>>>>>>");
         var cities = cityService.readAll();
 
         City city = cities.stream()
@@ -84,22 +89,26 @@ class CityServiceImplTest {
         cityService.delete(city.getId());
 
         log.trace("{}", city);
-
+        log.info("<<<<<<<< Finish deleting city >>>>>>>>>");
     }
 
     @Test
     @Order(3)
     void searchByCity(){
+        log.info("<<<<<<<< Start searching city >>>>>>>>>");
         List<City> cities = cityService.searchByCityByName("Pariss");
+
         AtomicReference<Boolean> cityIsFound = new AtomicReference<>(false);
+
         cities.forEach(c->{
             if(c.getCity().equals("Pariss")){
                 cityIsFound.set(true);
             }
-            log.trace("{}",c);
+            log.trace("Read city {}",c);
         });
 
         assertEquals(true, cityIsFound.get(), "Error while searching a city");
+        log.info("<<<<<<<< Finish searching city >>>>>>>>>");
     }
 
     @Test
