@@ -1,7 +1,7 @@
 package com.hitema.jee.services;
 
 import com.hitema.jee.entities.Country;
-import com.hitema.jee.interfaces.CRUDService;
+import com.hitema.jee.interfaces.CountryService;
 import com.hitema.jee.repositories.CountryRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CountryServiceImpl implements CRUDService<Country, Long> {
+public class CountryServiceImpl implements CountryService{
 
     private final CountryRepository repository;
 
@@ -43,4 +43,7 @@ public class CountryServiceImpl implements CRUDService<Country, Long> {
     public List<Country> readAll() {
         return repository.findAll();
     }
+
+
+
 }

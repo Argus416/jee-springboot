@@ -14,4 +14,6 @@ public interface CityService {
     void delete(Long id);
     List<City> readAll();
     List<City> searchByCityByName(String city);
+
+    List<City> getAllCapitals();
 }

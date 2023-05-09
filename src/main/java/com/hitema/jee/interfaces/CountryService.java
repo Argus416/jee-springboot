@@ -7,10 +7,10 @@ import java.util.List;
 /**
  * CRUD Interface
  */
-public interface CRUDService<T, id> {
-    T create(T entity);
-    T read(Long id);
-    T update(T entity);
+public interface CountryService{
+    Country create(Country entity);
+    Country read(Long id);
+    Country update(Country entity);
     void delete(Long id);
-    List<T> readAll();
+    List<Country> readAll();
 }

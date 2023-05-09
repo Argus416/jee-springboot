@@ -18,11 +18,11 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @SpringBootTest
-class CityServiceImplTest {
+class ServiceImplTest {
 
     private static final Logger log = LoggerFactory.getLogger(CountryServiceImplTest.class);
     @Autowired
-    private CityService cityService;
+    private CityService service;
 
     @BeforeEach
     void setUp() {
@@ -43,7 +43,7 @@ class CityServiceImplTest {
         newCity.setLastUpdate(LocalDateTime.now());
         log.trace("{}", newCity);
 
-        cityService.create(newCity);
+        service.create(newCity);
 
         assertNotNull(newCity.getId(), "Error while creating a new city");
         log.info("<<<<<<<< Finish creating the city >>>>>>>>>");
@@ -52,7 +52,7 @@ class CityServiceImplTest {
     @Test
     void read() {
         log.info("<<<<<<<< Start reading the city >>>>>>>>>");
-        City city = cityService.read(1L);
+        City city = service.read(1L);
         log.trace("{}", city);
         assertEquals("A Corua (La Corua)", city.getCity(), "Error while reading a city");
         log.info("<<<<<<<< Finish reading the city >>>>>>>>>");
@@ -62,14 +62,14 @@ class CityServiceImplTest {
     @Order(2)
     void update() {
         log.info("<<<<<<<< Start updating a city >>>>>>>>>");
-        var cities = cityService.readAll();
+        var cities = service.readAll();
 
         City city = cities.stream()
                 .filter(
                         c-> "Pariss".equals(c.getCity())
                 ).findFirst().orElseThrow(()->new RuntimeException("No city found"));
         city.setCity("Pariss_updated");
-        cityService.update(city);
+        service.update(city);
         log.trace("{}", city);
         assertEquals("Pariss_updated", city.getCity(), "Error while updating a city");
         log.info("<<<<<<<< Finish updating a city >>>>>>>>>");
@@ -79,14 +79,14 @@ class CityServiceImplTest {
     @Order(4)
     void delete() {
         log.info("<<<<<<<< Start deleting city >>>>>>>>>");
-        var cities = cityService.readAll();
+        var cities = service.readAll();
 
         City city = cities.stream()
                 .filter(
                         c-> "Pariss_updated".equals(c.getCity())
                 ).findFirst().orElseThrow(()->new RuntimeException("No city found"));
 
-        cityService.delete(city.getId());
+        service.delete(city.getId());
 
         log.trace("{}", city);
         log.info("<<<<<<<< Finish deleting city >>>>>>>>>");
@@ -96,7 +96,7 @@ class CityServiceImplTest {
     @Order(3)
     void searchByCity(){
         log.info("<<<<<<<< Start searching city >>>>>>>>>");
-        List<City> cities = cityService.searchByCityByName("Pariss");
+        List<City> cities = service.searchByCityByName("Pariss");
 
         AtomicReference<Boolean> cityIsFound = new AtomicReference<>(false);
 
@@ -113,6 +113,14 @@ class CityServiceImplTest {
 
     @Test
     void readAll() {
-        cityService.readAll().forEach(c->log.trace("{}",c));
+        service.readAll().forEach(c->log.trace("{}",c));
+    }
+
+    @Test
+    void getAllCapitals() {
+        log.info("<<<<<<<< Start getting all capitals >>>>>>>>>");
+        List<City> cities = service.getAllCapitals();
+        cities.forEach(c->log.trace("{}",c));
+        log.info("<<<<<<<< Start getting all capitals >>>>>>>>>");
     }
 }

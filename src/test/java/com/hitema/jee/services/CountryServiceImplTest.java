@@ -1,8 +1,7 @@
 package com.hitema.jee.services;
 
 import com.hitema.jee.entities.Country;
-import com.hitema.jee.interfaces.CRUDService;
-import com.mysql.cj.log.Log;
+import com.hitema.jee.interfaces.CountryService;
 import org.junit.jupiter.api.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +19,7 @@ class CountryServiceImplTest {
 
     private static final Logger log = LoggerFactory.getLogger(CountryServiceImplTest.class);
     @Autowired
-    private CRUDService<Country, Long> service;
+    private CountryService service;
 
     @BeforeEach
     void setUp() {
@@ -76,9 +75,7 @@ class CountryServiceImplTest {
                 ).findFirst().orElseThrow(()->new RuntimeException("No country found"));
 
         service.delete(country.getId());
-
         log.trace("{}", country);
-
     }
 
     @Test
@@ -86,4 +83,6 @@ class CountryServiceImplTest {
             service.readAll().forEach(c->log.trace("{}",c)
         );
     }
+
+
 }

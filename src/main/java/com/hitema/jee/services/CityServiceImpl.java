@@ -1,11 +1,8 @@
 package com.hitema.jee.services;
 
 import com.hitema.jee.entities.City;
-import com.hitema.jee.entities.Country;
-import com.hitema.jee.interfaces.CRUDService;
 import com.hitema.jee.interfaces.CityService;
 import com.hitema.jee.repositories.CityRepository;
-import com.hitema.jee.repositories.CountryRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -50,6 +47,9 @@ public class CityServiceImpl implements CityService {
     @Override
 
     public List<City> searchByCityByName(String city) {
-        return repository.findAllByCityContaining(city);
+        return repository.findAllByCityContainingIgnoreCase(city);
+    }
+    public List<City> getAllCapitals() {
+        return repository.findAllByIsCapitalIgnoreCase();
     }
 }

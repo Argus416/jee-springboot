@@ -21,6 +21,8 @@ public class City {
     @Column(name = "last_update")
     private LocalDateTime lastUpdate;
 
+    @Column(name = "capital")
+    private Boolean isCapital;
     public City() {
     }
 
@@ -56,6 +58,15 @@ public class City {
     public void setCountryId(Country country_id) {
         this.countryId = country_id;
     }
+
+    public Boolean getIsCapital() {
+        return isCapital;
+    }
+
+    public void setIsCapital(Boolean isCapital) {
+        this.isCapital = isCapital;
+    }
+
 
     @Override
     public String toString() {
