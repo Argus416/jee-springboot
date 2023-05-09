@@ -14,7 +14,7 @@ public class City {
 
     @ManyToOne()
     @JoinColumn(name = "country_id")
-    private Country country_id;
+    private Country countryId;
 
     @Column(name = "city")
     private String city;
@@ -49,19 +49,19 @@ public class City {
         this.lastUpdate = lastUpdate;
     }
 
-    public Country getCountry_id() {
-        return country_id;
+    public Country getCountryId() {
+        return countryId;
     }
 
-    public void setCountry_id(Country country_id) {
-        this.country_id = country_id;
+    public void setCountryId(Country country_id) {
+        this.countryId = country_id;
     }
 
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("City{");
         sb.append("id=").append(id);
-        sb.append(", country_id=").append(country_id);
+        sb.append(", country_id=").append(countryId);
         sb.append(", city='").append(city).append('\'');
         sb.append(", lastUpdate=").append(lastUpdate);
         sb.append('}');

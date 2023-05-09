@@ -10,7 +10,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDateTime;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @SpringBootTest
@@ -18,7 +21,7 @@ class CityServiceImplTest {
 
     private static final Logger log = LoggerFactory.getLogger(CountryServiceImplTest.class);
     @Autowired
-    private CRUDService<City, Long> service;
+    private CRUDService<City, Long> cityService;
 
     @BeforeEach
     void setUp() {
@@ -29,20 +32,25 @@ class CityServiceImplTest {
     @Test
     void create() {
         log.info("Start creating a new city");
-
         City newCity = new City();
+        Country country = new Country();
+
+        country.setId(1L);
+
         newCity.setCity("Pariss");
-        service.create(newCity);
-
-
+        newCity.setCountryId(country);
+        newCity.setLastUpdate(LocalDateTime.now());
         log.trace("{}", newCity);
-        assertEquals("Pariss", newCity.getCity(), "Error while creating a new city");
+
+        cityService.create(newCity);
+
+        assertNotNull(newCity.getId(), "Error while creating a new city");
     }
 
     @Test
     void read() {
         log.info("Start reading a city");
-        City city = service.read(1L);
+        City city = cityService.read(1L);
         log.trace("{}", city);
         assertEquals("A Corua (La Corua)", city.getCity(), "Error while reading a city");
     }
@@ -50,14 +58,14 @@ class CityServiceImplTest {
     @Test
     @Order(2)
     void update() {
-        var cities = service.readAll();
+        var cities = cityService.readAll();
 
         City city = cities.stream()
                 .filter(
                         c-> "Pariss".equals(c.getCity())
                 ).findFirst().orElseThrow(()->new RuntimeException("No city found"));
         city.setCity("Pariss_updated");
-        service.update(city);
+        cityService.update(city);
         log.trace("{}", city);
         assertEquals("Pariss_updated", city.getCity(), "Error while updating a city");
     }
@@ -65,14 +73,14 @@ class CityServiceImplTest {
     @Test
     @Order(3)
     void delete() {
-        var cities = service.readAll();
+        var cities = cityService.readAll();
 
         City city = cities.stream()
                 .filter(
                         c-> "Pariss_updated".equals(c.getCity())
                 ).findFirst().orElseThrow(()->new RuntimeException("No city found"));
 
-        service.delete(city.getId());
+        cityService.delete(city.getId());
 
         log.trace("{}", city);
 
@@ -80,7 +88,7 @@ class CityServiceImplTest {
 
     @Test
     void readAll() {
-        service.readAll().forEach(c->log.trace("{}",c)
+        cityService.readAll().forEach(c->log.trace("{}",c)
         );
     }
 }

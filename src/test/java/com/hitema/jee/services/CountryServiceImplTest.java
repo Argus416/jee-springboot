@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @SpringBootTest
@@ -38,7 +39,7 @@ class CountryServiceImplTest {
 
 
         log.trace("{}", newCountry);
-        assertEquals("Francee", newCountry.getCountry(), "Error while creating a new country");
+        assertNotNull(newCountry.getId(), "Error while creating a new country");
     }
 
     @Test
