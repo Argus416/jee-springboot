@@ -50,6 +50,6 @@ public class CityServiceImpl implements CityService {
         return repository.findAllByCityContainingIgnoreCase(city);
     }
     public List<City> getAllCapitals() {
-        return repository.findAllByIsCapitalIgnoreCase();
+        return repository.readCitiesByIsCapitalIsTrue();
     }
 }

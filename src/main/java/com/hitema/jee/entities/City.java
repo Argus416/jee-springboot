@@ -70,12 +70,12 @@ public class City {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("City{");
-        sb.append("id=").append(id);
-        sb.append(", country_id=").append(countryId);
-        sb.append(", city='").append(city).append('\'');
-        sb.append(", lastUpdate=").append(lastUpdate);
-        sb.append('}');
-        return sb.toString();
+        return "City{" +
+                "id=" + id +
+                ", countryId=" + countryId +
+                ", city='" + city + '\'' +
+                ", lastUpdate=" + lastUpdate +
+                ", isCapital=" + isCapital +
+                '}';
     }
 }
