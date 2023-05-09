@@ -1,5 +1,6 @@
 package com.hitema.jee.services;
 
+import com.hitema.jee.interfaces.CRUDService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
@@ -9,18 +10,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @SpringBootTest
 class CountryServiceImplTest {
 
     private static final Logger log = LoggerFactory.getLogger(CountryServiceImplTest.class);
     @Autowired
-    private CountryService service;
+    private CRUDService service;
 
     @BeforeEach
     void setUp() {
+
     }
 
     @Test
