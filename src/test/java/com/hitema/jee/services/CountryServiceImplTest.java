@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDateTime;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -31,6 +33,7 @@ class CountryServiceImplTest {
 
         Country newCountry = new Country();
         newCountry.setCountry("Francee");
+        newCountry.setLastUpdate(LocalDateTime.now());
         service.create(newCountry);
 
 

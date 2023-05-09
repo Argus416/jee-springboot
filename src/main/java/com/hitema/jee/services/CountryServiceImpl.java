@@ -21,7 +21,7 @@ public class CountryServiceImpl implements CRUDService<Country, Long> {
     private static final Logger log = LoggerFactory.getLogger(CountryServiceImpl.class);
     @Override
     public Country create(Country country) {
-        return null;
+        return repository.save(country);
     }
 
     @Override
